@@ -1,0 +1,16 @@
+* {
+  font-family: Outfit;
+}
+
+#lives {
+  color: red;
+}
+
+.title {
+  font-size: 4rem;
+}
+
+#word {
+  font-size: 3rem;
+  font-family: "Nova Mono";
+}
