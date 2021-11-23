@@ -1,6 +1,6 @@
 $(document).ready(async function () {
   // fetch wordlist.json
-  const wordList = await fetch("/wordlist.json").then((res) => res.json());
+  const wordList = await fetch("./wordlist.json").then((res) => res.json());
   setupKeyboard();
   setupGame(wordList);
 });
