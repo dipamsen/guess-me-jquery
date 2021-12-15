@@ -1,8 +1,8 @@
 $(document).ready(async function () {
   // fetch wordlist.json
-  const wordList = await fetch("./wordlist.json").then((res) => res.json());
+  // const wordList = await fetch("./wordlist.json").then((res) => res.json());
   setupKeyboard();
-  setupGame(wordList);
+  fetchWord();
 });
 
 function setupKeyboard() {
@@ -30,8 +30,8 @@ let guessedLetters = [];
 let lives = 5;
 let gameOver = false;
 
-function setupGame(wordList) {
-  word = wordList[Math.floor(Math.random() * wordList.length)];
+function setupGame(fetched_word) {
+  word = fetched_word;
   guessedLetters = [];
   updateWord();
   $("#hint").html(word.category);
@@ -82,4 +82,16 @@ function endGame(outcome) {
     $("#word").addClass("text-success");
     updateScore(word.word.length);
   } else $("#word").addClass("text-danger");
+}
+
+function fetchWord() {
+  $.ajax({
+    url: "/get-template",
+    method: "GET",
+    success(data) {
+      if (data.status === "success") {
+        setupGame(data.word);
+      }
+    },
+  });
 }
